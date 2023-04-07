@@ -7,4 +7,4 @@ Desenvolvedores:
 
 * (⌐■_■) - Gabriel R.
 * ╰(\*°▽°\*)╯ - Yasmim S.
-* (☞ﾟヮﾟ)☞ - Gabriel F.
+* (\*/ω＼\*) - Gabriel F.
