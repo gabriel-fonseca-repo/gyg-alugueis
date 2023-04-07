@@ -1,0 +1,9 @@
+div.buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+div.buttons>button {
+	width: 45%;
+}

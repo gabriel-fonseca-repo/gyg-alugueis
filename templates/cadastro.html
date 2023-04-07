@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/cadastro" method="post">
+    <fieldset>
+        <legend>Faça seu cadastro.</legend>
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome </label>
+            <input type="nome" class="form-control" id="nome" name="nome" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email </label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="pswd" class="form-label">Senha </label>
+            <input type="password" class="form-control" id="pswd" name="pswd" required>
+        </div>
+
+        <div class="buttons">
+            <button onclick="red('/login')" type="button" class="btn btn-primary">Voltar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar-se</button>
+        </div>
+    </fieldset>
+</form>
+
+<link rel="stylesheet" href="static/css/cadastro.css">
+<script src="static/js/cadastro.js"></script>
+
+{% endblock %}
