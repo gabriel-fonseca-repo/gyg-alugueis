@@ -7,8 +7,8 @@ Desenvolvido em Python com as tecnologias Flask e PostgreSQL.
 ## Inicialização do projeto:
 
 1. Explicitar as variáveis de ambiente do banco de dados no arquivo `.env` na raiz do projeto:
-   1. DB_USER_NAME > nome do usuário do banco.
-   2. DB_USER_PSWD > senha do usuário do banco.
+   1. `DB_USER_NAME` > nome do usuário do banco.
+   2. `DB_USER_PSWD` > senha do usuário do banco.
 2. Instalar as dependências: `pip install -r requirements.txt`
 3. Rodar as migrations para sincronização com o banco:
    1. Caso seja a primeira vez inicializando, rodar o seguinte comando para gerar os arquivos de migração: `python -m flask db init`
