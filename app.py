@@ -14,13 +14,14 @@ dbpswd = os.getenv('DB_USER_PSWD')
 dbhost = os.getenv('DB_HOST')
 dbname = os.getenv('DB_NAME')
 dbdriver = os.getenv('DB_DRIVER')
+secretkey = os.getenv('SCRKEY')
 
 app.config.update(
     TEMPLATES_AUTO_RELOAD=True,
     DEBUG=True,
     SQLALCHEMY_DATABASE_URI=f'{dbdriver}://{dbuser}:{dbpswd}@{dbhost}/{dbname}',
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
-    SECRET_KEY='oirodrigues',
+    SECRET_KEY=secretkey,
     SESSION_PERMANENT=False,
     SESSION_TYPE="filesystem"
 )
