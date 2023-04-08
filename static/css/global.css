@@ -44,3 +44,8 @@ main {
 	width: 600px;
 	min-width: fit-content;
 }
+
+a {
+	color: var(--ft-color);
+	text-decoration: none;
+}

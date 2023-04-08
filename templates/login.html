@@ -6,13 +6,12 @@
         <legend>Faça login ou cadastre-se!</legend>
         <div class="mb-3">
             <label for="email" class="form-label">Email: </label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="pswd" class="form-label">Senha: </label>
-            <input type="password" class="form-control" id="pswd" name="pswd">
+            <input type="password" class="form-control" id="pswd" name="pswd" required>
         </div>
-        <input type="hidden" name="pressed_button" id="pressed_button">
         <div class="buttons">
             <button type="submit" class="btn btn-primary">Logar</button>
             <button onclick="red('/cadastro')" type="button" class="btn btn-primary">Se
