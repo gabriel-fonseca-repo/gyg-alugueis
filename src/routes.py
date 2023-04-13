@@ -1,7 +1,7 @@
 from app import app, db
 from flask import flash, redirect, render_template, request, session, url_for
 from excepts.ErroDeAutenticacao import ErroDeAutenticacao
-from orm.Usuario import Usuario
+from src.orm import Usuario
 
 
 @app.route("/")
@@ -80,6 +80,11 @@ def logout():
         session.clear()
     flash(message='Usuario deslogado com sucesso!', category='primary')
     return redirect(url_for('login'))
+
+
+@app.route("/aluguel")
+def aluguel():
+    return render_template("aluguel.html")
 
 
 if __name__ == '__main__':
