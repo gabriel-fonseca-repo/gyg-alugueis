@@ -1,8 +1,10 @@
 from datetime import datetime
+
+from flask_login import UserMixin
 from app import db
 
 
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True, nullable=False)
     nome = db.Column(db.String(80), unique=True, nullable=False)
@@ -27,6 +29,6 @@ class Aluguel(db.Model):
                             backref=db.backref('carro_alugueis', lazy=True))
 
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),
-                         nullable=False)
+                           nullable=False)
     usuario = db.relationship('Usuario',
                               backref=db.backref('usuario_alugueis', lazy=True))

@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_session import Session
 from dotenv import load_dotenv
+from flask_login import LoginManager
 import os
 
-load_dotenv() 
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -30,6 +31,8 @@ app.config.update(
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 Session(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 with (app.app_context()):
     db.create_all()
