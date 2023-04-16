@@ -1,14 +1,6 @@
+from src.extensions import db
 from datetime import datetime
-
-from flask_login import UserMixin
-from app import db
-
-
-class Usuario(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(80), unique=True, nullable=False)
-    nome = db.Column(db.String(80), unique=True, nullable=False)
-    senha = db.Column(db.String(100), nullable=False)
+from flask_security.models.fsqla_v3 import FsUserMixin, FsRoleMixin
 
 
 class Carro(db.Model):
@@ -18,17 +10,23 @@ class Carro(db.Model):
 
 
 class Aluguel(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    inicio_aluguel = db.Column(db.DateTime, nullable=False,
-                               default=datetime.utcnow)
-    final_aluguel = db.Column(db.DateTime, nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    inicio_aluguel = db.Column(
+        db.DateTime(), nullable=False, default=datetime.utcnow)
+    final_aluguel = db.Column(db.DateTime(), nullable=False)
+    carro_id = db.Column(db.Integer(), db.ForeignKey(
+        'carro.id'), nullable=False)
+    carro = db.relationship(
+        'Carro', backref=db.backref('carro_alugueis', lazy=True))
+    user_id = db.Column(db.Integer(), db.ForeignKey(
+        'user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref(
+        'user_alugueis', lazy=True))
 
-    carro_id = db.Column(db.Integer, db.ForeignKey('carro.id'),
-                         nullable=False)
-    carro = db.relationship('Carro',
-                            backref=db.backref('carro_alugueis', lazy=True))
 
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),
-                           nullable=False)
-    usuario = db.relationship('Usuario',
-                              backref=db.backref('usuario_alugueis', lazy=True))
+class User(db.Model, FsUserMixin):
+    pass
+
+
+class Role(db.Model, FsRoleMixin):
+    pass

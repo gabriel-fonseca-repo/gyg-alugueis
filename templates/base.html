@@ -22,7 +22,7 @@
             <h3>Gyg Alugueis</h3>
         </a>
         {% if current_user and current_user.is_authenticated %}
-            <h5>Logado como {{current_user.nome}}</h5><a href="/logout">Deslogar</a>
+            <h5>Logado como {{current_user.username}}</h5><a href="/logout">Deslogar</a>
         {% endif %}
     </aside>
     <main>

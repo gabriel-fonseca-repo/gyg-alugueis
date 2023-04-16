@@ -1,13 +1,10 @@
 from flask_login import current_user, login_required, login_user, logout_user
-from app import app, db, login_manager
+from app import app
+from src.extensions import login_manager, db, security
 from flask import flash, redirect, render_template, request, url_for
 from excepts.ErroDeAutenticacao import ErroDeAutenticacao
-from src.orm import Carro, Usuario
-
-
-@login_manager.user_loader
-def carregar_usuario(id_usuario):
-    return db.session.execute(db.select(Usuario).filter_by(id=int(id_usuario))).scalar_one()
+from src.orm import Carro
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @app.route("/")
@@ -32,21 +29,18 @@ def login():
         page_return = 'login'
         try:
             f = request.form
-            usuarioTentandoLogar = db.session.execute(
-                db.select(Usuario).filter_by(email=f['email'])).scalar_one()
+            usuarioTentandoLogar = security.datastore.find_user(email=f['email'])
             if usuarioTentandoLogar is None:
-                raise ErroDeAutenticacao
+                raise ErroDeAutenticacao('Email não cadastrado ou com erro!')
             else:
-                if usuarioTentandoLogar.senha == f['pswd']:
+                if check_password_hash(usuarioTentandoLogar.password, f['pswd']):
                     login_user(usuarioTentandoLogar)
                     msg = ("Login realizado com sucesso!", 'primary')
                     page_return = 'index'
                 else:
-                    raise ErroDeAutenticacao
-        except ErroDeAutenticacao:
-            msg = ("Email ou senha errados!", 'danger')
-        except:
-            msg = ("Erro inesperado, tente novamente!", 'danger')
+                    raise ErroDeAutenticacao('Senha errada!')
+        except ErroDeAutenticacao as error:
+            msg = (error.args[0], 'danger')
         flash(message=msg[0], category=msg[1])
         return redirect(url_for(page_return))
 
@@ -60,11 +54,11 @@ def cadastro():
         page_return = ''
         try:
             f = request.form
-            novoUsuario = Usuario(
-                email=f['email'], senha=f['pswd'], nome=f['nome'])
-            db.session.add(novoUsuario)
-            db.session.commit()
+            security.datastore.create_role(name='Admin', permissions=['ADMIN_CRUD'])
+            security.datastore.create_user(email=f['email'], password=generate_password_hash(
+                f['pswd']), username=f['nome'])
             page_return = 'login'
+            db.session.commit()
         except:
             msg = ("Email já cadastrado!", 'danger')
             page_return = 'cadastro'
@@ -111,9 +105,11 @@ def page_not_found(e):
 @login_manager.unauthorized_handler
 def acesso_nao_autorizado():
     flash(message=f'Faça login para poder acessar esta página.',
-        category='warning')
+          category='warning')
     return redirect(url_for('login'))
 
 
-if __name__ == '__main__':
-    app.run()
+@app.route("/map")
+def rotas():
+    print(app.url_map)
+    return redirect(url_for('index'))

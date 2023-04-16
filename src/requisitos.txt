@@ -1,0 +1,70 @@
+❌[RFX 101] <CRUD de aluguel>
+O sistema deve permitir ao cliente usuário realizar o cadastro, consultar, alterar e cancelar uma locação de automóvel, com filtros para escolher a marca do carro, o período estimado de aluguel e a capacidade de pessoas do carro. O sistema deve registrar as seguintes informações de uma locação: data de início, data de término, preço total, forma de pagamento, CPF do cliente, número para contato, e-mail e data de cadastro.
+❌[RFX 102] <CRUD admin carro>
+O sistema deve permitir ao administrador usuário cadastrar, consultar, alterar e remover carros disponíveis para locação, com filtros para escolher a marca, a data de inserção, a capacidade de pessoas e o número de vezes que foi alugado. O sistema deve registrar as seguintes informações sobre um carro: modelo, placa, marca, capacidade de pessoas, preço por dia, data de inserção e número de vezes que foi alugado.
+❌[RFX 103] <CRUD admin aluguel>
+O sistema deve permitir ao administrador usuário cadastrar, consultar, alterar e remover todas as instâncias de aluguel, passadas, atuais ou futuras, com filtros para escolher a marca, a data de realização, a capacidade de pessoas e o período de locação. O sistema deve registrar as seguintes informações sobre um aluguel: data de início, data de término, preço total, forma de pagamento, CPF do cliente, número para contato, e-mail e data de cadastro.
+❌[RFX 104] <Verificar disponibilidade de carro>
+O sistema deve permitir que o cliente verifique a disponibilidade de um carro específico em um período de tempo definido, para que ele possa planejar sua reserva com antecedência.
+❌[RFX 105] <Reserva de carro com antecedência>
+O sistema deve permitir que o cliente reserve um carro com antecedência, especificando a data e hora de retirada e devolução, a categoria do carro, a forma de pagamento e as informações do condutor.
+❌[RFX 106] <Verificar histórico de aluguel de um carro>
+O sistema deve permitir que o cliente verifique o histórico de aluguel de um carro específico, incluindo informações como datas de locação, preço e informações do cliente que realizou a locação anteriormente.
+
+❌[RFX 201] <Tela de consulta de carros disponíveis>
+O sistema deve permitir ao cliente usuário consultar os carros disponíveis para aluguel, com filtros por modelo, placa, capacidade de pessoas e preço por dia. A tela de consulta deve exibir informações sobre o carro, tais como modelo, placa, marca, capacidade de pessoas e preço por dia. O cliente deve ser capaz de alugar um carro a partir dessa tela.
+❌[RFX 202] <Tela para consulta de histórico de aluguel>
+O sistema deve permitir ao cliente usuário consultar o histórico dos carros que ele já alugou, com filtros por modelo, placa, capacidade de pessoas, data de início e data de término do aluguel. A tela de consulta deve exibir informações sobre o aluguel, tais como modelo, placa, marca, capacidade de pessoas, preço por dia, data de início, data de término e preço total do aluguel.
+❌[RFX 203] <Sistema de busca avançada>
+O sistema deve possuir um mecanismo de busca avançada que permita a busca por diversos critérios, tais como: marca do carro, modelo, capacidade, número de portas, motor, combustível, entre outros.
+❌[RFX 204] <Estatísticas de aluguel>
+O sistema deve apresentar estatísticas relacionadas ao aluguel de carros, tais como: número de aluguéis realizados em um determinado período, faturamento total, carros mais alugados, carros menos alugados, entre outros.
+❌[RFX 205] <Alerta de manutenção>
+O sistema deve emitir alertas de manutenção para os carros cadastrados, levando em conta fatores como data da última revisão, quilometragem e tempo desde a última manutenção. O alerta deve ser emitido ao administrador do sistema.
+
+✅[RFX 301] <Autenticação de usuário>
+O sistema deve permitir que o usuário faça login usando um nome de usuário e senha válidos, antes de ter acesso às funções de CRUD do aluguel, bem como às telas de consulta. O sistema deve validar as credenciais do usuário antes de permitir o acesso.
+❌[RFX 302] <Cálculo de preço do aluguel>
+O sistema deve calcular o preço do aluguel com base em uma taxa diária que varia de acordo com a marca, modelo e ano do veículo selecionado, bem como com base na duração do aluguel. O sistema deve mostrar o preço total para o cliente antes da confirmação do aluguel.
+❌[RFX 303] <Reserva de carro>
+O sistema deve permitir que o cliente reserve um carro específico por um período de tempo específico. O sistema deve atualizar a disponibilidade do carro em tempo real para evitar reservas conflitantes.
+❌[RFX 306] <Feedback do cliente>
+O sistema deve permitir que o cliente deixe um feedback sobre o carro alugado, incluindo a limpeza, o desempenho, a segurança, entre outros aspectos. O sistema deve armazenar esses comentários em um banco de dados e permitir que o administrador os visualize para melhorar a qualidade do serviço oferecido.
+
+Usabilidade
+✅[RNF 101] <Facilidade de Uso>
+O sistema deve ser projetado para ser intuitivo e de fácil utilização pelos usuários finais, com interfaces limpas e claras, visando a redução do tempo de aprendizagem dos usuários e minimização de erros operacionais.
+✅[RNF 102] <Livraria de estilização>
+A interface do usuário deve ser implementada utilizando o Bootstrap, de forma a garantir um design moderno e responsivo.
+
+Confiabilidade
+✅[RNF 201] <Disponibilidade>
+O sistema deve estar disponível para uso 24 horas por dia, 7 dias por semana, com exceção de períodos de manutenção programada, e a indisponibilidade do sistema não pode ultrapassar 2% do tempo total de operação mensal.
+
+Desempenho
+✅[RNF 301] <Tempo de resposta>
+O sistema deve responder às requisições dos usuários em no máximo 3 segundos, a partir do momento em que a solicitação é enviada.
+
+Suportabilidade
+✅[RNF 402] <Segurança>
+O sistema deve garantir a segurança das informações dos usuários, com criptografia dos dados sensíveis, controle de acesso e armazenamento adequado dos dados. Deve seguir as melhores práticas de segurança da informação.
+
+Design
+✅[RNF 501] <Esquema de cores>
+O software deve ter as seguintes cores: “292f36” como cor principal, “e8f1f2” como cor de ênfase e “4ecdc4” como cor de acentuação.
+
+Implementação
+✅[RNF 601] <Linguagem de programação>
+O sistema deve ser implementado na linguagem de programação Python, seguindo o paradigma de orientação a objetos.
+✅[RNF 602] <Instruções de banco de dados>
+As instruções SQL utilizadas para criar e manipular o banco de dados PostgreSQL devem seguir as melhores práticas de programação, como padronização de nomes e utilização de comentários explicativos.
+✅[RNF 603] <Manutenção>
+O sistema deve ser fácil de manter e atualizar, com código bem estruturado. Deve seguir as melhores práticas de desenvolvimento de software.
+✅[RNF 604] <Performance>
+O sistema deve ser desenvolvido de forma a garantir alto desempenho, com otimização de algoritmos e estruturas de dados, e uso eficiente de recursos de hardware e software.
+✅[RNF 605] <Portabilidade>
+O sistema deve ser compatível com diferentes navegadores e sistemas operacionais, sem comprometer a usabilidade ou o desempenho.
+
+Interface
+✅[RNF 701] <Responsividade>
+A interface deve escalar para diferentes tamanhos de monitores e telas, e sempre manter a mesma proporção e funcionamento independente de plataforma.
