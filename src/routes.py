@@ -1,4 +1,4 @@
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_security import current_user, login_required, login_user, logout_user, permissions_required
 from app import app
 from src.extensions import login_manager, db, security
 from flask import flash, redirect, render_template, request, url_for
@@ -29,7 +29,8 @@ def login():
         page_return = 'login'
         try:
             f = request.form
-            usuarioTentandoLogar = security.datastore.find_user(email=f['email'])
+            usuarioTentandoLogar = security.datastore.find_user(
+                email=f['email'])
             if usuarioTentandoLogar is None:
                 raise ErroDeAutenticacao('Email não cadastrado ou com erro!')
             else:
@@ -54,9 +55,13 @@ def cadastro():
         page_return = ''
         try:
             f = request.form
-            security.datastore.create_role(name='Admin', permissions=['ADMIN_CRUD'])
+
+            std_role = security.datastore.find_or_create_role(
+                name='Aluguel', page_url='aluguel', description='Cargo que habilita o aluguel de carros.', permissions=['USER_ALUGUEL_CRUD'])
+
             security.datastore.create_user(email=f['email'], password=generate_password_hash(
-                f['pswd']), username=f['nome'])
+                f['pswd']), username=f['nome'], roles=[std_role])
+
             page_return = 'login'
             db.session.commit()
         except:
@@ -67,15 +72,16 @@ def cadastro():
 
 
 @app.route("/logout")
-@login_required
 def logout():
-    logout_user()
+    if current_user.is_authenticated:
+        logout_user()
     flash(message='Usuario deslogado com sucesso!', category='primary')
     return redirect(url_for('login'))
 
 
 @app.route("/carro", methods=['POST', 'GET'])
 @login_required
+@permissions_required('ADMIN_CARRO_CRUD')
 def carro():
     if request.method == 'GET':
         carros = db.session.execute(db.select(Carro)).scalars()
@@ -92,13 +98,29 @@ def carro():
             msg = ("Erro inesperado, tente novamente!", 'danger')
         flash(message=msg[0], category=msg[1])
         carros = db.session.execute(db.select(Carro)).scalars()
-        return render_template("carro.html", carros=carros)
+    return render_template("carro.html", carros=carros)
+
+
+@app.route("/aluguel", methods=['POST', 'GET'])
+@login_required
+def aluguel():
+    if request.method == 'GET':
+        return render_template("aluguel.html")
+    elif request.method == 'POST':
+        return render_template("aluguel.html")
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     flash(message='404 - Não encontramos a tela que você tentou acessar!',
           category='warning')
+    return redirect(url_for('index'))
+
+
+@app.errorhandler(403)
+def page_not_found(e):
+    flash(message='Você não tem acesso a esta funcionalidade!',
+          category='danger')
     return redirect(url_for('index'))
 
 

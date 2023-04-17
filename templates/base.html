@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -16,16 +16,22 @@
     <script src="static/js/global.js"></script>
 </head>
 
-<body>
-    <aside>
+<body class="container row">
+    <aside class="col-3 d-none d-lg-flex">
         <a href="/index">
             <h3>Gyg Alugueis</h3>
         </a>
         {% if current_user and current_user.is_authenticated %}
-            <h5>Logado como {{current_user.username}}</h5><a href="/logout">Deslogar</a>
+        <h5>Olá {{current_user.username}}!</h5><a href="/logout">Deslogar</a>
+        <br>
+        <ul class="list-group">
+            {% for role in current_user.roles %}
+            <li class="list-group-item"><a href="/{{ role.page_url }}">{{ role.name }}</a></li>
+            {% endfor %}
+        </ul>
         {% endif %}
     </aside>
-    <main>
+    <main class="col-9">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class=flashes>

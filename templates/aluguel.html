@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/aluguel" method="post">
+    <fieldset>
+    </fieldset>
+</form>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Modelo</th>
+            <th scope="col">Placa</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carro in carros %}
+        <tr>
+            <td> {{ carro.modelo }} </td>
+            <td> {{ carro.placa }} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<link rel="stylesheet" href="static/css/aluguel.css">
+<script src="static/js/aluguel.js"></script>
+
+{% endblock %}

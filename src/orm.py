@@ -29,4 +29,5 @@ class User(db.Model, FsUserMixin):
 
 
 class Role(db.Model, FsRoleMixin):
+    page_url = db.Column(db.String(80))
     pass

@@ -3,9 +3,8 @@
 
 
 {% if current_user.is_authenticated %}
-    <h1>Seja bem vindo, {{current_user.nome}}, ao Gyg Alugueis!</h1>
 {% else %}
-    {{ redirect(url_for('login')) }}    
+    {{ redirect(url_for('login')) }}
 {% endif %}
 
 <link rel="stylesheet" href="static/css/index.css">

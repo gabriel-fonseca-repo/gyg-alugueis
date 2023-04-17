@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
 
-:root {
-	--aside-bg-color: #292f36;
-	--body-bg-color: #e8f1f2;
-	--dt-color: #4ecdc4;
-	--ft-color: #e8f1f2;
-	--ft-dark-color: #555b6e;
-}
-
 * {
 	font-family: "Roboto Slab", serif;
 }
@@ -20,18 +12,14 @@ body {
 
 	display: flex;
 	flex-direction: row;
-	background-color: var(--body-bg-color);
+	background-color: var(--bs-dark-border-subtle);
 }
 
 aside {
-	background-color: var(--aside-bg-color);
-	color: var(--ft-color);
+	background-color: var(--bs-dark-bg-subtle);
+	color: var(--bs-light);
 
-	width: 15%;
-	min-width: fit-content;
-	max-width: 300px;
-	height: 100%;
-	padding: 10px;
+	padding: 25px;
 
 	display: flex;
 	flex-direction: column;
@@ -39,13 +27,14 @@ aside {
 	align-items: center;
 }
 
+aside > ul {
+	width: 85%;
+}
+
 main {
 	padding: 25px;
-	width: 600px;
-	min-width: fit-content;
 }
 
 a {
-	color: var(--ft-color);
 	text-decoration: none;
 }

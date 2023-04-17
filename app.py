@@ -33,7 +33,9 @@ app.config.update(
     SECURITY_REGISTER_URL='/security/register',
     SECURITY_RESET_URL='/security/reset',
     SECURITY_CHANGE_URL='/security/change',
-    SECURITY_CONFIRM_URL='/security/confirm'
+    SECURITY_CONFIRM_URL='/security/confirm',
+    SECURITY_VERIFY_URL='/security/verify',
+    SECURITY_STATIC_URL='/security/static'
 )
 
 with (app.app_context()):
