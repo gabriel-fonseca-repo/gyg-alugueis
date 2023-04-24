@@ -7,6 +7,9 @@ class Carro(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     placa = db.Column(db.String(8), unique=True, nullable=False)
     modelo = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(255), nullable=False)
+    descricao_imagem = db.Column(db.String(255), nullable=False)
+    url_imagem = db.Column(db.String(255), nullable=False)
 
 
 class Aluguel(db.Model):

@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_security import SQLAlchemyUserDatastore, Security
 from flask_security.models import fsqla_v3 as fsqla
 
-db = SQLAlchemy()
+db: SQLAlchemy = SQLAlchemy()
 login_manager = LoginManager()
 session = Session()
 migrate = Migrate()

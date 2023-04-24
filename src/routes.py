@@ -91,7 +91,11 @@ def carro():
         try:
             f = request.form
             novoCarro = Carro(
-                modelo=f['modelo'], placa=f['placa'])
+                modelo=f['modelo'],
+                placa=f['placa'],
+                descricao=f['descricao'],
+                url_imagem=f['url_imagem'],
+                descricao_imagem=f['descricao_imagem'])
             db.session.add(novoCarro)
             db.session.commit()
         except:
@@ -105,9 +109,25 @@ def carro():
 @login_required
 def aluguel():
     if request.method == 'GET':
-        return render_template("aluguel.html")
+        carros = db.session.execute(db.select(Carro)).scalars()
+        return render_template("aluguel.html", carros=carros)
     elif request.method == 'POST':
         return render_template("aluguel.html")
+
+
+@app.route("/aluguel/<int:id_carro>", methods=['POST', 'GET'])
+@login_required
+def aluguel_especifico(id_carro):
+    carro = db.session.execute(
+        db.select(Carro).filter_by(id=int(id_carro))).scalar()
+    if carro is None:
+        flash(message=f'404 - Não encontramos o carro com o código {id_carro}!',
+              category='warning')
+        return redirect(url_for('aluguel'))
+    if request.method == 'GET':
+        return render_template("aluguel_especifico.html", carro=carro)
+    elif request.method == 'POST':
+        return render_template("aluguel_especifico.html", carro=carro)
 
 
 @app.errorhandler(404)

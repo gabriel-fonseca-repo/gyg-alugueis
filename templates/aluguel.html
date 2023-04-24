@@ -1,29 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form action="/aluguel" method="post">
-    <fieldset>
-    </fieldset>
-</form>
-<br>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Modelo</th>
-            <th scope="col">Placa</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for carro in carros %}
-        <tr>
-            <td> {{ carro.modelo }} </td>
-            <td> {{ carro.placa }} </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for carro in carros %}
+    <div class="col">
+        <div class="card">
+            <div class="img-container"><img src={{ carro.url_imagem }} class="card-img-top" alt={{
+                    carro.descricao_imagem }}></div>
+            <div class="card-body">
+                <h5 class="card-title">{{ carro.modelo }}</h5>
+                <p class="card-text">{{ carro.descricao }}</p>
+                <button onclick="red('aluguel/{{ carro.id }}')" type="submit" class="btn btn-primary">Alugar</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <link rel="stylesheet" href="static/css/aluguel.css">
-<script src="static/js/aluguel.js"></script>
 
 {% endblock %}
