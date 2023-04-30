@@ -1,15 +1,24 @@
+from decimal import Decimal
 from src.extensions import db
 from datetime import datetime
 from flask_security.models.fsqla_v3 import FsUserMixin, FsRoleMixin
 
 
 class Carro(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True)
     placa = db.Column(db.String(8), unique=True, nullable=False)
     modelo = db.Column(db.String(100), nullable=False)
+    marca = db.Column(db.String(100), nullable=False)
     descricao = db.Column(db.String(255), nullable=False)
     descricao_imagem = db.Column(db.String(255), nullable=False)
     url_imagem = db.Column(db.String(255), nullable=False)
+
+    custo_diario = db.Column(db.Numeric(
+        10, 2), default=Decimal('0.00'), nullable=False)
+    capacidade_pessoas = db.Column(db.Integer(), default=0, nullable=False)
+
+    quantidade_alugueis = db.Column(db.Integer(), default=0)
+    data_de_insercao = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
 class Aluguel(db.Model):

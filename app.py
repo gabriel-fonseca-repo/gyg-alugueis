@@ -41,6 +41,5 @@ app.config.update(
 with (app.app_context()):
     from src.extensions import init_extensions
     init_extensions(app=app)
-    import src.orm as orm
-    import src.auth as auth
-    import src.routes as routes
+    from src import orm
+    from src.routes import main, login, error, aluguel, carro
