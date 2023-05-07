@@ -7,3 +7,7 @@ div.buttons {
 div.buttons>button {
 	width: 45%;
 }
+
+main {
+	width: 30%;
+}

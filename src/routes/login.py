@@ -5,9 +5,11 @@ from flask import flash, redirect, render_template, request, url_for
 from excepts.ErroDeAutenticacao import ErroDeAutenticacao
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 @login_manager.user_loader
 def carregar_usuario(id_usuario):
     return security.datastore.find_user(fs_uniquifier=id_usuario)
+
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
@@ -38,6 +40,9 @@ def login():
 @app.route("/cadastro", methods=['POST', 'GET'])
 def cadastro():
     if request.method == 'GET':
+        if current_user is not None and current_user.is_authenticated:
+            flash(message='Dê logout antes de criar uma nova conta!', category='primary')
+            return redirect(url_for('index'))
         return render_template("cadastro.html")
     elif request.method == 'POST':
         msg = ("Usuario cadastrado com sucesso!", 'primary')
