@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/seusalugueis" method="get">
+    <div class="row g-3">
+        <div class="col-md-2">
+            <label for="modelo" class="form-label">Modelo </label>
+            <input maxlength="80" type="text" class="form-control" id="modelo" name="modelo"
+                value="{{ request.args.get('modelo') or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="marca" class="form-label">Marca </label>
+            <input maxlength="80" type="text" class="form-control" id="marca"
+                value="{{ request.args.get('marca') or '' }}" name="marca">
+        </div>
+        <div class="col-md-2">
+            <label for="capacidade_pessoas" class="form-label">Capacidade </label>
+            <input maxlength="80" type="number" min="1" step="1" class="form-control" id="capacidade_pessoas"
+                value="{{ request.args.get('capacidade_pessoas') or '' }}" name="capacidade_pessoas">
+        </div>
+        <div class="col-md-2">
+            <label for="total_pagar" class="form-label">Total a pagar </label>
+            <input type="text" class="form-control" id="total_pagar" name="total_pagar"
+                value="{{ request.args.get('total_pagar') or '' }}">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-2">
+            <label for="inicio_aluguel" class="form-label">Data de início do aluguel </label>
+            <input maxlength="80" type="date" class="form-control" id="inicio_aluguel" name="inicio_aluguel"
+                value="{{ request.args.get('inicio_aluguel') or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="final_aluguel" class="form-label">Data de finalização do aluguel </label>
+            <input maxlength="80" type="date" class="form-control" id="final_aluguel" name="final_aluguel"
+                value="{{ request.args.get('final_aluguel') or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="forma_pagamento" class="form-label">Forma de pagamento</label>
+            <select class="form-select" id="forma_pagamento" name="forma_pagamento">
+                <option value="cdc">Cartão de crédito</option>
+                <option value="cdd">Cartão de débito</option>
+                <option value="blt">Boleto</option>
+                <option value="pix" selected>Pix</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Pesquisar</button>
+</form>
+<br />
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+    {% for aluguel in alugueis %}
+    <div class="col">
+        <div class="card">
+            <img src={{ aluguel.carro.url_imagem }} class="card-img-top" alt={{ aluguel.carro.descricao_imagem }}>
+            <div class="card-body">
+                <h5 class="card-title">Modelo: {{ aluguel.carro.modelo }}</h5>
+                <p class="card-text">Placa: {{ aluguel.carro.placa }}</p>
+                <p class="card-text">Marca: {{ aluguel.carro.marca }}</p>
+                <p class="card-text">
+                    Esse aluguel durará de <br> {{ aluguel.inicio_aluguel.strftime('%d/%m/%Y') }}
+                </p>
+                <p class="card-text">
+                    até <br> {{ aluguel.final_aluguel.strftime('%d/%m/%Y') }}
+                </p>
+                <button type="button" class="btn btn-danger"
+                    onclick="red('/aluguel/del/{{ aluguel.id }}');">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<link rel="stylesheet" href="static/css/aluguel.css">
+
+{% endblock %}

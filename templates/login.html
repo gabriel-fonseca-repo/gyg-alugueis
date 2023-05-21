@@ -2,22 +2,23 @@
 {% block content %}
 
 <form action="/login" method="POST">
-    <fieldset>
-        <legend>Faça login ou cadastre-se!</legend>
-        <div class="mb-3">
+    <h5>Faça login ou cadastre-se!</h5>
+
+    <div class="row g-3">
+        <div class="col-md-2">
             <label for="email" class="form-label">Email: </label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
-        <div class="mb-3">
+        <div class="col-md-2">
             <label for="pswd" class="form-label">Senha: </label>
             <input type="password" class="form-control" id="pswd" name="pswd" required>
         </div>
-        <div class="buttons">
-            <button type="submit" class="btn btn-primary">Logar</button>
-            <button onclick="red('/cadastro')" type="button" class="btn btn-success">Se
-                cadastrar</button>
-        </div>
-    </fieldset>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Logar</button>
+    <button onclick="red('/cadastro')" type="button" class="btn btn-success">Se
+        cadastrar</button>
+</form>
 </form>
 
 <link rel="stylesheet" href="static/css/login.css">

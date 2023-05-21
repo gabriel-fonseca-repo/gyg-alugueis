@@ -17,8 +17,8 @@
         </div>
         <div class="col-md-2">
             <label for="placa" class="form-label">Placa </label>
-            <input maxlength="8" type="text" class="form-control" id="placa"
-                value="{{ request.args.get('placa') or '' }}" name="placa">
+            <input type="text" class="form-control" id="placa" value="{{ request.args.get('placa') or '' }}"
+                name="placa">
         </div>
         <div class="col-md-2">
             <label for="capacidade_pessoas" class="form-label">Capacidade </label>
@@ -48,47 +48,49 @@
     </button>
 </form>
 <br>
-<table class="table" id="table" data-toggle="table" data-search="true" data-filter-control="true"
-    data-toolbar="#toolbar" class="table-responsive">
-    <thead>
-        <tr>
-            <th scope="col">Modelo</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Placa</th>
-            <th scope="col">Custo diário</th>
-            <th scope="col">Capacidade</th>
-            <th scope="col">Qtd. Alugueis</th>
-            <th scope="col">Data de cadastro</th>
-            <th scope="col">Descrição</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for carro in carros %}
-        <tr>
-            <td> {{ carro.modelo }} </td>
-            <td> {{ carro.marca }} </td>
-            <td> {{ carro.placa }} </td>
-            <td> {{ carro.custo_diario }} </td>
-            <td> {{ carro.capacidade_pessoas }} </td>
-            <td> {{ carro.quantidade_alugueis }} </td>
-            <td> {{ carro.data_de_insercao.strftime('%m/%d/%Y') }} </td>
-            <td> {{ carro.descricao }} </td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_carro"
-                    data-bs-is-edicao="true" data-bs-id="{{ carro.id }}" data-bs-modelo="{{ carro.modelo }}"
-                    data-bs-placa="{{ carro.placa }}" data-bs-descricao="{{ carro.descricao }}"
-                    data-bs-descricao_imagem="{{ carro.descricao_imagem }}" data-bs-url_imagem="{{ carro.url_imagem }}"
-                    data-bs-custo_diario="{{ carro.custo_diario }}"
-                    data-bs-capacidade_pessoas="{{ carro.capacidade_pessoas }}"
-                    data-bs-marca="{{ carro.marca }}">Editar</button>
-            </td>
-            <td> <button type="button" class="btn btn-danger"
-                    onclick="red('/carro/del/{{ carro.id }}');">Deletar</button></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-container">
+    <table class="table" id="table" data-toggle="table" data-search="true" data-filter-control="true"
+        data-toolbar="#toolbar" class="table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Modelo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Custo diário</th>
+                <th scope="col">Capacidade</th>
+                <th scope="col">Qtd. Alugueis</th>
+                <th scope="col">Data de cadastro</th>
+                <th scope="col">Descrição</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for carro in carros %}
+            <tr>
+                <td> {{ carro.modelo }} </td>
+                <td> {{ carro.marca }} </td>
+                <td> {{ carro.placa }} </td>
+                <td> {{ carro.custo_diario }} </td>
+                <td> {{ carro.capacidade_pessoas }} </td>
+                <td> {{ carro.quantidade_alugueis }} </td>
+                <td> {{ carro.data_de_insercao.strftime('%m/%d/%Y') }} </td>
+                <td> {{ carro.descricao }} </td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_carro"
+                        data-bs-is-edicao="true" data-bs-id="{{ carro.id }}" data-bs-modelo="{{ carro.modelo }}"
+                        data-bs-placa="{{ carro.placa }}" data-bs-descricao="{{ carro.descricao }}"
+                        data-bs-descricao_imagem="{{ carro.descricao_imagem }}"
+                        data-bs-url_imagem="{{ carro.url_imagem }}" data-bs-custo_diario="{{ carro.custo_diario }}"
+                        data-bs-capacidade_pessoas="{{ carro.capacidade_pessoas }}"
+                        data-bs-marca="{{ carro.marca }}">Editar</button>
+                </td>
+                <td> <button type="button" class="btn btn-danger"
+                        onclick="red('/carro/del/{{ carro.id }}');">Deletar</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <div class="modal fade" id="modal_carro" tabindex="-1">
     <form action="/carro" method="post">
@@ -114,7 +116,7 @@
 
                     <div class="col-md-4">
                         <label for="placa" class="form-label">Placa </label>
-                        <input maxlength="8" type="text" class="form-control" id="placa" name="placa" required>
+                        <input type="text" class="form-control" id="placa" name="placa">
                     </div>
 
                     <div class="col-md-4">
@@ -135,7 +137,7 @@
 
                     <div class="col-md-4">
                         <label for="custo_diario" class="form-label">Custo por dia </label>
-                        <input type="number" class="form-control" id="custo_diario" name="custo_diario" required>
+                        <input type="number" maxlength="99999999.99" class="form-control" id="custo_diario" name="custo_diario" required>
                     </div>
 
                     <div class="col-md-8">

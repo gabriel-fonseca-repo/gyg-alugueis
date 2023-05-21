@@ -1,9 +1,101 @@
 {% extends "base.html" %}
 {% block content %}
 
-<fieldset>{{ carro.modelo }}</fieldset>
+<form action="/alugar" method="post">
+    <div class="row g-3">
+        <div class="col-md-5">
+            <div class="card">
+                <img src="{{ carro.url_imagem }}" class="card-img-top" alt="{{ carro.descricao_imagem }}">
+                <div class="card-body">
+                    <h5 class="card-title">Modelo: {{ carro.modelo }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Marca: {{ carro.marca }}</h6>
+                    <p class="card-text">Placa: {{ carro.placa }}</p>
+                    <p class="card-text" id="custo_por_dia_formatado">Custo por dia:</p>
+                    <p class="card-text">Capacidade: {{ carro.capacidade_pessoas }} </p>
+                    <p class="card-text">Descrição: {{ carro.descricao }} </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <input type="hidden" id="carro_id" name="carro_id" value="{{ carro.id }}">
+                    <input type="hidden" id="custo_diario" name="custo_diario" value="{{ carro.custo_diario }}">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="inicio_aluguel" class="form-label">Data de início do aluguel </label>
+                            <input type="date" class="form-control" id="inicio_aluguel" name="inicio_aluguel" required
+                                oninvalid="this.setCustomValidity('A data de início é obrigatória')"
+                                oninput="this.setCustomValidity('')" onchange="calcularTotalPagar();">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="final_aluguel" class="form-label">Data de finalização do aluguel </label>
+                            <input type="date" class="form-control" id="final_aluguel" name="final_aluguel" required
+                                oninvalid="this.setCustomValidity('A data de finalização é obrigatória')"
+                                oninput="this.setCustomValidity('')" onchange="calcularTotalPagar();">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="total_pagar" class="form-label">Total a pagar </label>
+                            <input type="text" class="form-control" id="total_pagar" name="total_pagar" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="forma_pagamento" class="form-label">Forma de pagamento</label>
+                            <select class="form-select" id="forma_pagamento" name="forma_pagamento" required>
+                                <option value="cdc">Cartão de crédito</option>
+                                <option value="cdd">Cartão de débito</option>
+                                <option value="blt">Boleto</option>
+                                <option value="pix" selected>Pix</option>
+                            </select>
+                        </div>
+                        {% if current_user.cpf %}
+                        <div class="col-md-4">
+                            <label for="cpf" class="form-label">Seu CPF </label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" value="{{current_user.cpf}}"
+                                disabled>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <label for="cpf" class="form-label">Seu CPF </label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" required
+                                oninvalid="this.setCustomValidity('O CPF é obrigatório')"
+                                oninput="this.setCustomValidity('')">
+                        </div>
+                        {% endif %}
+                        {% if current_user.celular %}
+                        <div class="col-md-4">
+                            <label for="celular" class="form-label">Celular </label>
+                            <input type="text" class="form-control" id="celular" name="celular"
+                                value="{{current_user.celular}}" disabled>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <label for="celular" class="form-label">Celular </label>
+                            <input type="text" class="form-control" id="celular" name="celular" required
+                                oninvalid="this.setCustomValidity('O celular é obrigatório')"
+                                oninput="this.setCustomValidity('')">
+                        </div>
+                        {% endif %}
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Alugar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <link rel="stylesheet" href="/static/css/aluguel_especifico.css">
 <script src="/static/js/aluguel_especifico.js"></script>
+
+<script>
+    function formatarDinheiro(valor) {
+        return new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        }).format(valor);
+    }
+    document.getElementById('custo_por_dia_formatado').innerText = 'Custo por dia: ' + formatarDinheiro('{{ carro.custo_diario }}');
+</script>
 
 {% endblock %}

@@ -41,7 +41,8 @@ def login():
 def cadastro():
     if request.method == 'GET':
         if current_user is not None and current_user.is_authenticated:
-            flash(message='Dê logout antes de criar uma nova conta!', category='primary')
+            flash(message='Dê logout antes de criar uma nova conta!',
+                  category='primary')
             return redirect(url_for('index'))
         return render_template("cadastro.html")
     elif request.method == 'POST':

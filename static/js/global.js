@@ -1,3 +1,15 @@
+showLoadingDialog();
+
+function showLoadingDialog() {
+	const loadingDialog = document.getElementById("loading");
+	loadingDialog.showModal();
+}
+
+function hideLoadingDialog() {
+	const loadingDialog = document.getElementById("loading");
+	loadingDialog.close(null);
+}
+
 function red(endpoint) {
 	window.location.href = endpoint;
 }
@@ -6,7 +18,7 @@ function invMsg(element, msg) {
 	if (!element.value) {
 		element.setCustomValidity(msg);
 	} else {
-		element.setCustomValidity('');
+		element.setCustomValidity("");
 	}
 }
 
@@ -19,4 +31,11 @@ function valEmail(email) {
 		email.setCustomValidity("");
 	}
 	return true;
+}
+
+function formatarDinheiro(valor) {
+	return new Intl.NumberFormat("pt-BR", {
+		style: "currency",
+		currency: "BRL",
+	}).format(valor);
 }

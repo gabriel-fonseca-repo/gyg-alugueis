@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-5 g-4">
+<form action="/aluguel" method="get">
+    <div class="row g-3">
+        <div class="col-md-2">
+            <label for="modelo" class="form-label">Modelo </label>
+            <input maxlength="80" type="text" class="form-control" id="modelo" name="modelo"
+                value="{{ request.args.get('modelo') or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="marca" class="form-label">Marca </label>
+            <input maxlength="80" type="text" class="form-control" id="marca"
+                value="{{ request.args.get('marca') or '' }}" name="marca">
+        </div>
+        <div class="col-md-2">
+            <label for="capacidade_pessoas" class="form-label">Capacidade </label>
+            <input maxlength="80" type="number" min="1" step="1" class="form-control" id="capacidade_pessoas"
+                value="{{ request.args.get('capacidade_pessoas') or '' }}" name="capacidade_pessoas">
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Pesquisar</button>
+</form>
+<br />
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
     {% for carro in carros %}
     <div class="col">
         <div class="card">
@@ -9,7 +31,19 @@
             <div class="card-body">
                 <h5 class="card-title">{{ carro.modelo }}</h5>
                 <p class="card-text">{{ carro.descricao }}</p>
+                <p class="card-text">{{ carro.placa }}</p>
+                <p class="card-text">{{ carro.marca }}</p>
+                {% if carro.isDisponivel() %}
+                <p class="card-text">O carro está disponível 👍</p>
                 <button onclick="red('aluguel/{{ carro.id }}')" type="submit" class="btn btn-primary">Alugar</button>
+                {% else %}
+                <p class="card-text">O carro está alugado 🤏</p>
+                {% if carro.getProxDataDisponivel() %}
+                <p class="card-text">Ele estará disponível nesta data: {{
+                    carro.getProxDataDisponivel().strftime('%m/%d/%Y') }}</p>
+                {% endif %}
+                <button class="btn btn-primary" disabled>Alugar</button>
+                {% endif %}
             </div>
         </div>
     </div>

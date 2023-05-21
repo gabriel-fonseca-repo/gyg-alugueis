@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_security import login_required, permissions_required
-from sqlalchemy import and_, cast, func
+from sqlalchemy import and_, func
 from app import app
 from src.extensions import db
 from flask import flash, redirect, render_template, request, url_for

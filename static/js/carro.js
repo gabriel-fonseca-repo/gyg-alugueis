@@ -1,3 +1,19 @@
+$(document).ready(() => {
+	$("[name='placa']").mask("FFF-0Z00", {
+		translation: {
+			Z: {
+				pattern: /([0-9A-Z])/,
+				optional: false,
+			},
+			F: {
+				pattern: /([A-Z])/,
+				optional: false,
+			},
+		},
+		placeholder: "___-____",
+	});
+});
+
 const modal_carro = document.getElementById("modal_carro");
 if (modal_carro) {
 	modal_carro.addEventListener("show.bs.modal", (event) => {

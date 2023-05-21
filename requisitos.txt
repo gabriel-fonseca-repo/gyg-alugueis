@@ -1,17 +1,17 @@
-❌[RFX 101] <CRUD de aluguel>
-O sistema deve permitir ao cliente usuário realizar o cadastro, consultar, alterar e cancelar uma locação de automóvel, com filtros para escolher a marca do carro, o período estimado de aluguel e a capacidade de pessoas do carro. O sistema deve registrar as seguintes informações de uma locação: data de início, data de término, preço total, forma de pagamento, CPF do cliente, número para contato, e-mail e data de cadastro.
+✅[RFX 101] <CRUD de aluguel>
+O sistema deve permitir ao cliente usuário realizar o ✅cadastro, ✅consultar e ✅cancelar uma locação de automóvel, com filtros para escolher a marca do carro e a capacidade de pessoas do carro. O sistema deve registrar as seguintes informações de uma locação: data de início, data de término, preço total, forma de pagamento, CPF do cliente, número para contato, e-mail e data de cadastro.
 ✅[RFX 102] <CRUD admin carro>
 O sistema deve permitir ao administrador usuário cadastrar, consultar, alterar e remover carros disponíveis para locação, com filtros para escolher a marca, a data de inserção, a capacidade de pessoas e o número de vezes que foi alugado. O sistema deve registrar as seguintes informações sobre um carro: modelo, placa, marca, capacidade de pessoas, preço por dia, data de inserção e número de vezes que foi alugado.
-❌[RFX 103] <Verificar disponibilidade de carro>
+✅[RFX 103] <Verificar disponibilidade de carro>
 O sistema deve permitir que o cliente verifique a disponibilidade de um carro específico em um período de tempo definido, para que ele possa planejar sua reserva com antecedência.
 
-❌[RFX 201] <Tela de consulta de carros disponíveis>
-O sistema deve permitir ao cliente usuário consultar os carros disponíveis para aluguel, com filtros por modelo, placa, capacidade de pessoas e preço por dia. A tela de consulta deve exibir informações sobre o carro, tais como modelo, placa, marca, capacidade de pessoas e preço por dia. O cliente deve ser capaz de alugar um carro a partir dessa tela.
+✅[RFX 201] <Tela de consulta de carros disponíveis>
+O sistema deve permitir ao cliente usuário consultar os carros disponíveis para aluguel, com filtros por modelo, capacidade de pessoas e preço por dia. A tela de consulta deve exibir informações sobre o carro, tais como modelo, placa, marca, capacidade de pessoas e preço por dia. O cliente deve ser capaz de alugar um carro a partir dessa tela.
 
 ✅[RFX 301] <Autenticação de usuário>
 O sistema deve permitir que o usuário faça login usando um nome de usuário e senha válidos, antes de ter acesso às funções de CRUD do aluguel, bem como às telas de consulta. O sistema deve validar as credenciais do usuário antes de permitir o acesso.
-❌[RFX 302] <Cálculo de preço do aluguel>
-O sistema deve calcular o preço do aluguel com base em uma taxa diária que varia de acordo com a marca, modelo e ano do veículo selecionado, bem como com base na duração do aluguel. O sistema deve mostrar o preço total para o cliente antes da confirmação do aluguel.
+✅[RFX 302] <Cálculo de preço do aluguel>
+O sistema deve calcular o preço do aluguel com base em uma taxa diária. O sistema deve mostrar o preço total para o cliente antes da confirmação do aluguel.
 
 Usabilidade
 ✅[RNF 101] <Facilidade de Uso>
