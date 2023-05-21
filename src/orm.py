@@ -52,10 +52,8 @@ class Aluguel(db.Model):
     forma_pagamento = db.Column(db.String(3))
     carro = db.relationship('Carro', back_populates="alugueis")
     user = db.relationship('User', back_populates="alugueis")
-    carro_id = db.Column(db.Integer(), db.ForeignKey(
-        'carro.id'), nullable=False)
-    user_id = db.Column(db.Integer(), db.ForeignKey(
-        'user.id'), nullable=False)
+    carro_id = db.Column(db.Integer(), db.ForeignKey('carro.id'), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
 
 
 class User(db.Model, FsUserMixin):
