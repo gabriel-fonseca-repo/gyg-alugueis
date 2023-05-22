@@ -5,3 +5,4 @@ flask_session/
 venv-gyg-alugueis/
 .vercel
 .env copy
+gygenv/

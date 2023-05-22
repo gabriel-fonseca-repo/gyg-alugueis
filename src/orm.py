@@ -14,7 +14,7 @@ class Carro(db.Model):
     url_imagem = db.Column(db.String(255), nullable=False)
     alugueis = db.relationship("Aluguel", back_populates="carro")
     custo_diario = db.Column(db.Numeric(
-        10, 2), default=Decimal('0.00'), nullable=False)
+        19, 2), default=Decimal('0.00'), nullable=False)
     capacidade_pessoas = db.Column(db.Integer(), default=0, nullable=False)
     quantidade_alugueis = db.Column(db.Integer(), default=0)
     data_de_insercao = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -48,7 +48,7 @@ class Aluguel(db.Model):
         db.DateTime(), nullable=False, default=datetime.utcnow)
     final_aluguel = db.Column(db.DateTime(), nullable=False)
     total_pagar = db.Column(db.Numeric(
-        10, 2), default=Decimal('0.00'), nullable=False)
+        19, 2), default=Decimal('0.00'), nullable=False)
     forma_pagamento = db.Column(db.String(3))
     carro = db.relationship('Carro', back_populates="alugueis")
     user = db.relationship('User', back_populates="alugueis")
